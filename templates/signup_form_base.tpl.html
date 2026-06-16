@@ -1,0 +1,15 @@
+{% extends "base.tpl.html" %}
+
+{% block content %}
+	<div class="wrapper fadeInDown">
+		<div id="formContent">
+			<!-- Sign up Form -->
+			<form action="signup.php" method="POST">
+			  <input type="text" id="username" class="fadeIn first" name="username" placeholder="Desired username"><br><br>
+			  <input type="password" id="password" class="fadeIn second" name="password" placeholder="Desired password"><br><br>
+			  <input type="password" id="confirm_password" class="fadeIn third" name="confirm_password" placeholder="Retype password"><br><br>
+			  <input type="submit" class="fadeIn fourth" value="Sign up">
+			</form>
+		</div>
+	</div>
+{% endblock %}

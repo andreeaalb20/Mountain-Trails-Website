@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+/* --- SETARI GLOBALE --- */
+* {
+    font-family: 'Oswald', sans-serif;
+    text-decoration: none !important;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+/* --- NAVBAR SI FOOTER --- */
+.navbar, 
+footer {
+    background-color: #2D5A27 !important;
+    border: none !important;
+}
+
+/* Titlul site-ului (Logo) */
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Link-uri inactive in meniu */
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.55) !important;
+    transition: 0.3s;
+}
+
+/* Link activ si efect de hover */
+.navbar-nav .nav-item.active .nav-link, 
+.navbar-nav .nav-link.active, 
+.navbar .nav-link:hover {
+    color: #ffffff !important;
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* --- SECTIUNEA TITLU (JUMBOTRON) --- */
+.jumbotron, 
+.title-section {
+    background-color: #E9EDC9 !important;
+    color: #132A13;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* --- TITLURI PAGINA --- */
+h1, h2, h3, 
+h1 a, h2 a, h3 a {
+    color: #1b4332 !important;
+    font-weight: bold;
+    text-transform: none !important;
+    letter-spacing: 0.8px;
+}
+
+h4, h5, h6 {
+    color: #2d6a4f;
+    text-transform: none !important;
+}
+
+/* Efect de hover pentru titluri de tip link */
+a:hover h1, 
+a:hover h2, 
+a:hover h3 {
+    color: #bc6c25 !important;
+}
+
+/* --- IMAGINI SI GALERIE --- */
+.fakeimg img, 
+.pictureimg {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.fakeimg img {
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.pictureimg {
+    height: 550px;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+
+/* Container pentru pozele din galerie */
+.pic_container {
+    position: relative;
+    width: 100%;
+    margin: 20px auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Overlay-ul cu text de pe poze */
+.pic_container .pic_content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(19, 42, 19, 0.75);
+    color: #ffffff !important;
+}
+
+.pic_container .pic_content h4, 
+.pic_container .pic_content h5 {
+    color: #ffffff !important;
+}
+
+/* --- ADMIN SI CARDURI --- */
+.card-header {
+    background-color: #1b4332 !important;
+    border: none !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff !important;
+}
+
+/* Fortam titlurile din headerele cardurilor sa fie albe */
+.card-header h1, 
+.card-header h2, 
+.card-header h3, 
+.card-header h4, 
+.card-header h5 {
+    color: #ffffff !important;
+    margin: 0;
+}
+
+/* --- BUTOANE --- */
+
+/* Butoane principale (Verde) */
+.btn-primary, 
+.btn-success {
+    background-color: #2D5A27 !important;
+    border: none !important;
+    color: white !important;
+}
+
+/* Buton Edit (Maro) */
+.btn-info {
+    background-color: #bc6c25 !important;
+    border: none !important;
+    color: white !important;
+}
+
+/* Buton Stergere (Rosu) */
+.btn-danger {
+    background-color: #ae2012 !important;
+    border: none !important;
+    color: white !important;
+}
+
+/* Efect de hover general pentru butoane */
+.btn-primary:hover, 
+.btn-success:hover, 
+.btn-info:hover, 
+.btn-danger:hover {
+    opacity: 0.9;
+}
+
+/* Buton Back to List */
+.card-header .btn-light {
+    background-color: #E9EDC9 !important;
+    color: #132A13 !important;
+    font-weight: bold;
+    border: none;
+}
+
+/* Sectiune selectare fisiere (Upload) */
+.input-group-text, 
+.custom-file-label::after {
+    background-color: #E9EDC9 !important;
+    color: #132A13 !important;
+    border: none;
+}
+
+/* Butoane grupate vertical in Admin */
+.btn-group-vertical .btn {
+    border-radius: 4px !important;
+    margin-bottom: 2px;
+}

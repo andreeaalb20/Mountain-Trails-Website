@@ -1,0 +1,95 @@
+{% extends "base.tpl.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0"><i class="fas fa-mountain"></i> Add a New Mountain Trail</h3>
+        </div>
+        <div class="card-body">
+            <p class="text-muted">Share your adventure with the community. Fill in the details below.</p>
+            <hr>
+            
+            <form action="save_gallery.php" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="font-weight-bold">Trail Title</label>
+                    <input type="text" name="title" class="form-control form-control-lg" placeholder="e.g. Moldoveanu Peak via Sambata Valley" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold">Short Description</label>
+                    <input type="text" name="title_description" class="form-control" placeholder="A catchy one-liner for the list view" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold">The Full Story</label>
+                    <textarea name="long_description" class="form-control" rows="6" placeholder="Describe the trail, the difficulty, and your feelings..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold">Cover Photo</label>
+                    <div class="custom-file">
+                        <input type="file" name="img" class="custom-file-input" id="trailImage" required>
+                        <label class="custom-file-label" for="trailImage">Choose a beautiful landscape...</label>
+                    </div>
+                    <small class="form-text text-muted">Please upload only JPG or PNG files.</small>
+                </div>
+
+				<div class="form-group border p-3 bg-light rounded">
+    <label class="font-weight-bold">Gallery Photos (optional)</label>
+    <p class="small text-muted">Add more photos to be displayed inside the trail details.</p>
+    
+    <div id="additional-photos">
+        </div>
+
+    <button type="button" class="btn btn-outline-info btn-sm mt-2" onclick="addPhotoField()">
+        <i class="fas fa-plus-circle"></i> Add another photo
+    </button>
+</div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-info btn-lg">
+                        <i class="fas fa-check-circle"></i> Publish Trail
+                    </button>
+                    <a href="manage_galleries.php" class="btn btn-outline-secondary btn-lg">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{# Script mic pentru a face numele fișierului să apară când îl selectezi #}
+<script>
+    $('.custom-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+</script>
+
+<script> 
+    let photoCount = 1;
+
+    function addPhotoField() {
+        let container = document.getElementById('additional-photos');
+        
+        // Cream un rând nou pentru fiecare poză
+        let div = document.createElement('div');
+        div.className = "custom-file mb-2";
+        
+        div.innerHTML = `
+            <input type="file" name="gallery_imgs[]" class="custom-file-input" id="photo_${photoCount}">
+            <label class="custom-file-label" for="photo_${photoCount}">Fotografia ${photoCount}</label>
+        `;
+        
+        container.appendChild(div);
+        
+        // Activăm logica de afișare nume fișier și pentru elementul nou creat
+        document.getElementById(`photo_${photoCount}`).addEventListener('change', function(e){
+            let fileName = e.target.files[0].name;
+            e.target.nextElementSibling.innerText = fileName;
+        });
+
+        photoCount++;
+    }
+</script>
+{% endblock %}

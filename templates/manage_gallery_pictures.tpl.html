@@ -1,0 +1,67 @@
+{% extends "base.tpl.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0"><i class="fas fa-images"></i> Photos for: {{ gallery_title }}</h3>
+            <a href="manage_galleries.php" class="btn btn-light btn-sm">Back to List</a>
+        </div>
+        <div class="card-body">
+            
+            <!-- Upload Section -->
+            <form action="add_extra_photo.php" method="POST" enctype="multipart/form-data" class="mb-5 p-3 border rounded bg-light">
+                <h5 class="mb-3">Add New Photo to Gallery</h5>
+                <input type="hidden" name="id_gallery" value="{{ id_gallery }}">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="custom-file">
+                            <input type="file" name="new_photo" class="custom-file-input" id="newPhoto" required>
+                            <label class="custom-file-label" for="newPhoto">Choose image...</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-success btn-block">Upload</button>
+                    </div>
+                </div>
+            </form>
+
+            <hr>
+
+            <!-- Photos Grid -->
+            <div class="row">
+                {% for pic in pictures %}
+                    <div class="col-md-3 mb-4 text-center">
+                        <div class="position-relative d-inline-block w-100">
+                            <img src="templates/pictures/{{ pic.picture }}" 
+                                 class="img-thumbnail shadow" 
+                                 style="height: 180px; width: 100%; object-fit: cover; border-radius: 8px;">
+                            
+                            <a href="delete_extra_photo.php?id={{ pic.id }}&id_gallery={{ id_gallery }}" 
+                               class="btn btn-danger btn-sm position-absolute shadow-lg" 
+                               style="top: 10px; right: 10px; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border: 2px solid white; padding: 0;"
+                               onclick="return confirm('Are you sure you want to delete this photo?')">
+                                <i class="fas fa-trash-alt" style="font-size: 16px; color: white;"></i>
+                            </a>
+                        </div>
+                        <small class="text-muted d-block mt-2 font-italic">{{ pic.picture }}</small>
+                    </div>
+                {% else %}
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-camera-retro fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">No additional photos found for this trail.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Update label with file name
+    $('.custom-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+</script>
+{% endblock %}

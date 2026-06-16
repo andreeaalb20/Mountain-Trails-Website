@@ -1,0 +1,47 @@
+{% extends "base.tpl.html" %}
+
+{% block content %}
+   <!-- <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Manage Mountain Trails</h2>
+		<a href="add_gallery.php" class="btn btn-success">Add New Trail</a>
+    </div> -->
+
+    <table class="table table-hover mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Preview</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in result_g %}
+            <tr>
+                <td style="width: 150px;">
+                    <img src="templates/pictures/{{ record.img }}" alt="" style="width: 100%; border-radius: 5px;">
+                </td>
+                <td>
+                    <strong>{{ record.title }}</strong>
+                </td>
+                <td>
+                    <small>{{ record.title_description }}</small>
+                </td>
+                <td>
+                    <div class="btn-group-vertical btn-group-sm">
+                        <a href="edit_gallery_info.php?id={{ record.id }}" class="btn btn-info mb-1">Edit Info</a>
+                        <a href="manage_gallery_pictures.php?id={{ record.id }}" class="btn btn-primary mb-1">Manage Photos</a>
+                        <a href="delete_gallery.php?id={{ record.id }}" 
+                           class="btn btn-danger" 
+                           onclick="return confirm('Delete this entire trail and all its photos?')">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center">No trails found. Create your first one!</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

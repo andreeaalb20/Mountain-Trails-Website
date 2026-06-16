@@ -1,0 +1,33 @@
+{% extends "base.tpl.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add a New Mountain Trail</h2>
+    <hr>
+    <form action="save_gallery.php" method="POST" enctype="multipart/form-data" class="mt-4">
+        <div class="form-group">
+            <label>Trail Title</label>
+            <input type="text" name="title" class="form-control" placeholder="e.g. Piatra Craiului Ridge" required>
+        </div>
+
+        <div class="form-group">
+            <label>Short Description</label>
+            <input type="text" name="title_description" class="form-control" placeholder="A brief summary of the hike" required>
+        </div>
+
+        <div class="form-group">
+            <label>Detailed Story</label>
+            <textarea name="long_description" class="form-control" rows="5" placeholder="Describe the full experience..." required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Cover Image</label>
+            <input type="file" name="img" class="form-control-file" required>
+            <small class="text-muted">Upload a beautiful landscape photo (JPG/PNG).</small>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg">Publish Trail</button>
+        <a href="manage_galleries.php" class="btn btn-secondary btn-lg">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{ pagetitle }}</title>
+  {{ include('bootstrap.tpl.html') }}
+  <link rel="stylesheet" href="templates/CSS/styles.css">
+  <link rel="stylesheet" href="templates/CSS/login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+	function addFields(){
+		if( typeof addFields.counter == 'undefined' ) {
+			addFields.counter = 0;
+		}
+		//addFields.counter++;
+		input_container.appendChild(document.createTextNode("Imaginea" + addFields.counter +": "));
+		var input = document.createElement("input");
+		input.type = "file";
+		input.accept = "image/*";
+		input.name = "Imagini[" + addFields.counter +"]";
+		input_container.appendChild(input);
+		input = document.createElement("input");
+		input.type = "text";
+		input.name="Short_description[" + addFields.counter +"]";
+		input_container.appendChild(input);
+		
+		// Append a line break 
+		input_container.appendChild(document.createElement("br"));
+		addFields.counter++;
+	}
+  </script>
+</head>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>{{ pagetitle }}</h1>
+  <p>Explore the most breathtaking mountain trails around the world.</p> 
+</div>
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+	{% for record in result_c %}
+		<li data-target="#demo" data-slide-to="{{ record.id-1 }}" class="{% if record.id == 1 %} active {% endif %}"></li>
+	{% endfor %}
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+	{% for record in result_c %}
+		<div class="carousel-item {% if record.id == 1 %} active {% endif %}">
+			<img src="templates/pictures/{{ record.file_name }}" 
+     alt="{{ record.file_description }}" 
+     class="d-block w-100" 
+     style="height: 500px; object-fit: cover;">
+        </div>
+    {% endfor %}
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">Mountain Trails</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a href="index.php" class="nav-link {% if pagetitle == 'Mountain Trails Gallery | Home' %}active{% endif %}">Home</a>
+            </li>
+            <li class="nav-item">
+				{% if user_name != '' %}
+					<a href="manage_galleries.php" class="nav-link {% if pagetitle == 'Management | Mountain Trails Gallery' %}active{% endif %}">
+            {{ user_id == 1 ? 'Manage All Trails' : 'Manage My Trails' }}
+          </a>
+				{% endif %}
+            </li>
+		
+      {% if user_id == 1 %}
+          <li class="nav-item">
+            <a class="nav-link {% if  pagetitle == 'User Management | Mountain Trails' %}active{% endif %}" href="manage_users.php">Manage Users</a>
+         </li>
+      {% endif %}
+      
+        </ul>
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+				{% if user_name == '' %}
+					User
+				{% else %}
+					{{ user_name }}
+				{% endif %}
+				</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    {% if user_name != '' %}
+						<a href="new_gallery_form.php" class="dropdown-item">Add New Trail</a>
+					{% endif %}
+                    <a href="{{ user_name == '' ? 'signup_form.php' : 'settings.php' }}" class="dropdown-item">
+						{{ user_name == '' ? 'Sign up' : 'Settings' }}						
+					</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{{ user_name == '' ? 'login_form.php' : 'logout.php' }}"class="dropdown-item">
+						{{ user_name == '' ? 'Log in' : 'Log out' }}
+					</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container" style="margin-top:30px">
+  <div class="row">
+    <div class="col-sm-4">
+  {% if user_name == '' %}
+    <h3>Welcome!</h3>
+    <p>Please log in to share your mountain adventures.</p>
+  {% else %}
+    <h2>Hiker: {{ user_name }}</h2>
+    <h5>My Photo:</h5>
+    <div class="fakeimg mb-3">
+        <img src="templates/pictures/users/{{ user_image }}" class="img-fluid rounded shadow-sm">
+    </div>
+    <p><em>{{ user_description }}</em></p>
+  {% endif %}
+  <hr class="d-sm-none">
+</div>
+	<div class="col-sm-8">
+		{% block content %}{% endblock %}
+	</div>
+  </div>
+</div>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>&copy; 2026 Mountain Trails Gallery | Exploring the Wilderness</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.tpl.html" %}
+
+{% block content %}
+   {% for record in result_g %}
+			<a href="show_gallery.php?id={{ record.id }}"><h2>{{ record.title }}</h2></a>
+			<h5>{{ record.title_description }}</h5>
+			<div class="fakeimg"><img src="templates/pictures/{{ record.img }}"></img></div>
+			<p>{{ record.long_description }}</p><br>
+	{% endfor %}
+{% endblock %}
